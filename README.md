@@ -2,7 +2,7 @@
 Automated backup and recovery of medium sized OpenStack environment
 
 
-##Use Cases
+## Use Cases
 
 - Check the health of running vm - And report to admin
 - Check the health of running docker instances on vm - And report to admin
@@ -11,7 +11,7 @@ Automated backup and recovery of medium sized OpenStack environment
 - Create new front-end (haproxy) and change floating-ip - And report to admin
 
 
-##Requirements
+## Requirements
 
 ```
 apt-get install python-openstackclient
