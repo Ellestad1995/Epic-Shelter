@@ -9,6 +9,7 @@ SENDEREMAIL=alert@localhost
 SERVER="$HOSTNAME"
 IFS.OLD=$IFS
 
+
 #Getting all servers
 VMSHUTOFF="$(openstack server list | grep SHUTOFF)"
 
