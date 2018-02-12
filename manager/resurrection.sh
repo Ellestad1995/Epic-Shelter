@@ -7,7 +7,7 @@ NOTIFYEMAIL=bookfacegruppe02@gmail.com
 SMSEMAIL=NULL
 SENDEREMAIL=alert@localhost
 SERVER="$HOSTNAME"
-IFS.OLD=$IFS
+IFSOLD=$IFS
 
 
 #Getting all servers
@@ -16,14 +16,14 @@ VMSHUTOFF="$(openstack server list | grep SHUTOFF)"
 #For all the vm that is shutoff we need to boot them back up and alert admin
 #Change the IFS environment variable to newline to be able to loop
 IFS=$'\n'
-for SHUTOFF in $(cat $VMSHUTOFF)
+for SHUTOFF in $VMSHUTOFF
 do
 
 #What virtual machine is this?
-ID="$(awk \'{ print $2}\' )"
-NAME="$(awk \'{ print $4}\' )"
-STATUS="$(awk \'{ print $6}\' )"
-NETWORK="$(awk \'{ print $8}\' )"
+ID="$( echo $SHUTOFF | awk \'{ print $2}\' )"
+NAME="$( echo $SHUTOFF | awk \'{ print $4}\' )"
+STATUS="$( echo $SHUTOFF | awk \'{ print $6}\' )"
+NETWORK="$( echo $SHUTOFF | awk \'{ print $8}\' )"
 
 if [ "$STATUS" = "SHUTOFF" ]
 then
@@ -40,4 +40,4 @@ fi
 done
 
 #Restore IFS
-IFS=$IFS.OLD
+IFS=$IFSOLD
