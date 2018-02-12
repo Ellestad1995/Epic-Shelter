@@ -20,10 +20,10 @@ for SHUTOFF in $VMSHUTOFF
 do
 
 #What virtual machine is this?
-ID="$( echo "$SHUTOFF" | awk \'{ print $2}\' )"
-NAME="$( echo "$SHUTOFF" | awk \'{ print $4}\' )"
-STATUS="$( echo "$SHUTOFF" | awk \'{ print $6}\' )"
-NETWORK="$( echo "$SHUTOFF" | awk \'{ print $8}\' )"
+ID="$( echo "$SHUTOFF" | awk { print $2} )"
+NAME="$( echo "$SHUTOFF" | awk { print $4} )"
+STATUS="$( echo "$SHUTOFF" | awk { print $6} )"
+NETWORK="$( echo "$SHUTOFF" | awk { print $8} )"
 
 if [ "$STATUS" = "SHUTOFF" ]
 then
