@@ -11,11 +11,11 @@ Automated backup and recovery of medium sized OpenStack environment
 - Create new front-end (haproxy) and change floating-ip - And report to admin
 
 
-##How does it work?
+## How does it work?
 Another part is the epic-shelter part that handles the automatic part of backup, creating and deleting vm
 
 ## Requirements
-
+Must be used on a "manager"-instance
 ```
 apt-get install python-openstackclient
 ```
