@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#Made by Joakim Ellestad, joakine@stud.ntnu.no
+
 #Using the openstack api to check for vm
 
 
