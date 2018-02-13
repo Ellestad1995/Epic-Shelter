@@ -13,7 +13,7 @@ IFSOLD=$IFS
 
 #Make sure openstack is going to work
 source /home/ubuntu/IMT3003_V18_group02.sh
-echo "$HOSTNAME is running a cron job- Resurrection " | /usr/bin/mail -s "Resurrection is started!" -r "$SENDEREMAIL" "$NOTIFYEMAIL"
+#echo "$HOSTNAME is running a cron job- Resurrection " | /usr/bin/mail -s "Resurrection is started!" -r "$SENDEREMAIL" "$NOTIFYEMAIL"
 
 #Getting all servers
 VMSHUTOFF="$(openstack server list | grep SHUTOFF)"
