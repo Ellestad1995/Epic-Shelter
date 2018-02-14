@@ -39,7 +39,24 @@ RUNNING="$(echo "$DOCKERSTATUS" | grep Active )"
 ACTIVE="$( echo "$LOADED" | awk '{print $2 }\')"
 if [[ STATUS = "inactive" ]]; then
   #It's not running. Try to start it
-START="$(ssh ubuntu@$IP service docker start)"
+  START="$(ssh ubuntu@$IP service docker start)"
+  if [ $? != "0" ]
+  then
+    #Did fail
+    echo "$NAME is $STATUS - did attempt docker start - failed" | /usr/bin/mail -s "Loosing kyrrecoins" -r "$SENDEREMAIL" "$NOTIFYEMAIL"
+    continue
+  fi
+#Seems like docker succeded starting.
+sleep(2)
+#Just wait a little for it to start.
+#Takes all docker images and start them with apache
+DOCKERPS="$(sudo docker ps -a )"
+DOCKEREXITED="$( echo "$DOCKERPS" | grep Exited )"
+IFS=$'\n'
+for EXITED in $DOCKEREXITED
+do
+#try to start them
+
 
 fi
 
