@@ -32,7 +32,7 @@ SERVER="$(openstack server create \
 --availability-zone $AVAILZONE \
 --nic net-id=$NETID \
 --wait \
-agon )"
+akvillo_docker_heavy )"
 
 STATUS="$( echo $SERVER | grep status | awk '{print $4 }\' )"
 ID="$( echo $SERVER | grep id | awk '{print $4 }\' )"
@@ -55,10 +55,10 @@ done
 #ONLY FOR DEPLOYING TEST - makes this vulnerable to MITM attack!
 #We cant do docker before docker is running
 STD=1
-SUCCESS="$(ssh -o StrictHostKeyChecking=no $USER@$IP \
-while [ test pgrep docker ] do; \
-sleep 21; done; \
-cd DockerDirectory/; sudo docker build -t 'web_docker:v1\' . )"
+SUCCESS="$(ssh -o StrictHostKeyChecking=no $USER@$IP "while :; \
+do if pgrep -f 'docker'; then break; else sleep 10; fi; done; \
+cd DockerDirectory/; \
+sudo docker build -t 'web_docker:v1' .; >/dev/null" )"
 
 R=$?
 if [ $R -ne 0 ]
@@ -68,11 +68,11 @@ echo "Failed docker build"
 exit 1
 fi
 
-
-SUCCESS="$(ssh -o StrictHostKeyChecking=no $USER@$IP for PORT in 80 81 82 83; do sudo docker run --restart=always -d -p $PORT:80 web_docker:v1; done 2>/dev/null)"
+SUCCESS="$(ssh -o StrictHostKeyChecking=no $USER@$IP 'for PORT in 80 81 82 83; do sudo docker run --restart=on-failure -d -p $PORT:80 web_docker:v1; done; >/dev/null' )"
 R=$?
 if [ "$R" -ne 0 ]
 then
 #Problem
 exit 1
 fi
+echo "Successfully created virtualmachine $ID @ $IP"
