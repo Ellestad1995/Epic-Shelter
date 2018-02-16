@@ -12,8 +12,6 @@ if [[ DIRSTAT -ne 0 ]]; then
   mkdir /home/ubuntu/backups
 fi
 
-
-
 #Lage en dump fil med riktig navn
 sudo mysqldump --opt --master-data=2 --flush-logs \
 --all-databases > /home/ubuntu/backups/backup.$(date +%d_%m_%y_%R).sql
