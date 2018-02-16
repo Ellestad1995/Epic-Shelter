@@ -3,6 +3,7 @@
 ######### BEFORE RUNNING #########
 #eval`ssh-agent`
 #ssh-add id_rsa
+#cron krever at enviroment variablene stemmer med de som er i cron
 ######### BEFORE RUNNING #########
 
 TMP=$(ls /home/ubuntu/backups)
