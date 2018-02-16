@@ -32,7 +32,7 @@ SERVER="$(openstack server create \
 --availability-zone $AVAILZONE \
 --nic net-id=$NETID \
 --wait \
-akvillo_backup_heavy )"
+backup )"
 
 STATUS="$( echo $SERVER | grep status | awk '{print $4 }\' )"
 ID="$( echo $SERVER | grep id | awk '{print $4 }\' )"
