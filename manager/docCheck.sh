@@ -32,19 +32,20 @@ LOADED="$(echo "$DOCKERSTATUS" | grep Loaded )"
 #Find either: Loaded, not-found
 STATUS="$( echo "$LOADED" | awk '{print $2 }\')"
 if [[ STATUS = "not-found" ]]; then
-  continue
+  #continue
+  exit 1
 fi
 #Its loaded but is it running?
 RUNNING="$(echo "$DOCKERSTATUS" | grep Active )"
 ACTIVE="$( echo "$LOADED" | awk '{print $2 }\')"
-if [[ STATUS = "inactive" ]]; then
+if [[ ACTIVE = "inactive" ]]; then
   #It's not running. Try to start it
   START="$(ssh ubuntu@$IP service docker start)"
   if [ $? != "0" ]
   then
     #Did fail
     echo "$NAME is $STATUS - did attempt docker start - failed" | /usr/bin/mail -s "Loosing kyrrecoins" -r "$SENDEREMAIL" "$NOTIFYEMAIL"
-    continue
+    exit 1
   fi
 #Seems like docker succeded starting.
 sleep(2)
@@ -56,6 +57,8 @@ IFS=$'\n'
 for EXITED in $DOCKEREXITED
 do
 #try to start them
+#Create new dockers
+
 
 
 fi
