@@ -8,8 +8,8 @@ DOCKERCOUNT=$(sudo docker ps -a | wc -l)
 
 #if dockers exsist; delte all of them
 if [[ $DOCKERCOUNT > 0 ]]; then
-  docker stop $(docker ps -a -q)
-  docker rm $(docker ps -a -q)
+  sudo docker stop $(sudo docker ps -a -q)
+  sudo docker rm $(sudo docker ps -a -q)
 fi
 
 #create new dockers
