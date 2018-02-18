@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ## TO RUN THIS ON REBOOT:
-##    crontab -e
-##    @reboot sh /home/user/script.sh
+##    sudo vim /etc/rc.local
+##    path/to/myscript || exit 1
 
 DOCKERCOUNT=$(sudo docker ps -a | wc -l)
 
