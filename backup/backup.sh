@@ -1,23 +1,21 @@
-#!/bin/bash
+#!/bin/bash -x
 
 ######### BEFORE RUNNING #########
-#eval`ssh-agent`
-#ssh-add id_rsa
-#cron krever at enviroment variablene stemmer med de som er i cron
+  # Kreves at man har et eksternt mountpoint som man backer up til
 ######### BEFORE RUNNING #########
 
-TMP=$(ls /home/ubuntu/backups)
+TMP=$(ls /backups/Full/)
 DIRSTAT=$?
 
 if [[ DIRSTAT -ne 0 ]]; then
-  mkdir /home/ubuntu/backups
+  sudo mkdir /backups/Full
 fi
 
 #Lage en dump fil med riktig navn
+
+NAME="backup.$(date +%d_%m_%y_%R).sql"
+
 sudo mysqldump --opt --master-data=2 --flush-logs \
---all-databases > /home/ubuntu/backups/backup.$(date +%d_%m_%y_%R).sql
+--all-databases > /home/ubuntu/$NAME
 
-LATESTMODFILE=$(ls -1 -t /home/ubuntu/backups/ | head -1)
-
-#Sende alt til backupvmen --> scp med privatekey
-scp -r -v -o StrictHostKeyChecking=no /home/ubuntu/backups/$LATESTMODFILE ubuntu@10.10.1.78:/home/ubuntu/backups
+sudo mv /home/ubuntu/$NAME /backups/Full

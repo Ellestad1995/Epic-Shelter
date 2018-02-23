@@ -14,7 +14,7 @@ openstack ip floating remove $FLOATINGIP $EXSISTINGHOST
 STATUSREMOVE=$?
 
 #tildele floating IP til $HOST som er parameter
-openstack ip floating add $FLOATINGIP $HOST
+openstack ip floating add $FLOATINGIP 
 STATUSADD=$?
 
 #Sende mail
