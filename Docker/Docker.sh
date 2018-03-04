@@ -13,6 +13,6 @@ if [[ $DOCKERCOUNT > 0 ]]; then
 fi
 
 #create new dockers
-for (( i = 80; i < 84; i++ )); do
+for (( i = 80; i <= 81; i++ )); do
   sudo docker run --restart=on-failure -d -p $i:80 web_docker:v1
 done
