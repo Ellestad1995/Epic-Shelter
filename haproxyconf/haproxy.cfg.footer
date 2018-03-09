@@ -1,0 +1,7 @@
+#Footer below     
+listen stats      
+    bind *:6969   
+    stats enable 
+    stats uri /  
+    stats hide-version 
+    stats auth akvillo:MacbookLenovo     
